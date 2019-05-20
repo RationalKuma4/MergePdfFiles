@@ -10,15 +10,15 @@ namespace MergePdfFiles
     {
         private static void Main()
         {
-            var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\SinNombre";
-            var namePath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\ConNombre";
+            var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\2\SinNombre";
+            //var namePath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\2\ConNombre";
 
             // Generico
             Merge(genericPath);
 
             // Nombre
             //ImagetoPdf(namePath);
-            Merge(namePath);
+            //Merge(namePath);
             
         }
 
