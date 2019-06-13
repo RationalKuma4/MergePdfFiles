@@ -10,28 +10,22 @@ namespace MergePdfFiles
     {
         private static void Main()
         {
-            var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\2\SinNombre";
-            //var namePath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\2\ConNombre";
+            var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\3\";
 
             // Generico
             Merge(genericPath);
-
-            // Nombre
-            //ImagetoPdf(namePath);
-            //Merge(namePath);
-            
         }
 
         public static void Merge(string path)
         {
-            using (PdfDocument one = PdfReader.Open($@"{path}\portada.pdf", PdfDocumentOpenMode.Import))
-            using (PdfDocument two = PdfReader.Open($@"{path}\protocolo.pdf", PdfDocumentOpenMode.Import))
-            using (PdfDocument outPdf = new PdfDocument())
+            using (var port = PdfReader.Open($@"{path}\Telematica.PortadaProtocolo.NoNombre.pdf", PdfDocumentOpenMode.Import))
+            using (var prot = PdfReader.Open($@"{path}\protocolo.pdf", PdfDocumentOpenMode.Import))
+            using (var outPdf = new PdfDocument())
             {
-                CopyPages(one, outPdf);
-                CopyPages(two, outPdf);
+                CopyPages(port, outPdf);
+                CopyPages(prot, outPdf);
 
-                outPdf.Save($@"{path}\PrtocoloEntrega.pdf");
+                outPdf.Save($@"{path}\NoNombre\3a.DTA.MI.2019-2.11.pdf");
             }
 
             void CopyPages(PdfDocument from, PdfDocument to)
