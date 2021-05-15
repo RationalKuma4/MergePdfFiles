@@ -1,8 +1,8 @@
-﻿using System.IO;
-using itex = iTextSharp.text;
-using ipdf = iTextSharp.text.pdf;
-using PdfSharp.Pdf;
+﻿using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using System.IO;
+using ipdf = iTextSharp.text.pdf;
+using itex = iTextSharp.text;
 
 namespace MergePdfFiles
 {
@@ -10,10 +10,30 @@ namespace MergePdfFiles
     {
         private static void Main()
         {
-            var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\3\";
+            //var genericPath = @"C:\Users\Anselmo-LT\Documents\GitHub\ProtocoloTerminal\Entrega\3\";
 
             // Generico
-            Merge(genericPath);
+            //Merge(genericPath);
+            MergeAllFromFolder();
+        }
+
+        private static void MergeAllFromFolder()
+        {
+            var folder = Directory.GetFiles(@"C:\Users\Anselmo\Downloads\doc-servicio");
+            using (var documentOne = PdfReader.Open(folder[1], PdfDocumentOpenMode.Import))
+            using (var documentTwo = PdfReader.Open(folder[0], PdfDocumentOpenMode.Import))
+            using (var pdfResult = new PdfDocument())
+            {
+                CopyPages(documentOne, pdfResult);
+                CopyPages(documentTwo, pdfResult);
+                pdfResult.Save(@"C:\Users\Anselmo\Downloads\doc-servicio\servicio.pdf");
+            }
+
+            void CopyPages(PdfDocument from, PdfDocument to)
+            {
+                for (var i = 0; i < from.PageCount; i++)
+                    to.AddPage(from.Pages[i]);
+            }
         }
 
         public static void Merge(string path)
